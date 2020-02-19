@@ -1,5 +1,5 @@
 ## Template React JS ADMIN
 
-# Pre configurado com :
+### Pre configurado com :
 - react-router-dom
 - styled-components
