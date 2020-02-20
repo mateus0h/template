@@ -1,15 +1,15 @@
 import React from 'react';
 import {
   Card,
-  CardActions,
   CardContent,
   CardHeader,
   Divider,
-  Button,
   TextField,
   Grid,
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
+
+import { ButtonSave, CardButtonSave } from './styles';
 
 export default function Repository() {
   return (
@@ -21,10 +21,9 @@ export default function Repository() {
           <Grid container spacing={3}>
             <Grid item md={3} xs={12}>
               <TextField
+                size="small"
                 fullWidth
-                helperText="Please specify the first name"
                 label="First name"
-                margin="dense"
                 name="firstName"
                 required
                 variant="outlined"
@@ -32,9 +31,9 @@ export default function Repository() {
             </Grid>
             <Grid item md={3} xs={12}>
               <TextField
+                size="small"
                 fullWidth
                 label="Last name"
-                margin="dense"
                 name="lastName"
                 required
                 variant="outlined"
@@ -42,9 +41,9 @@ export default function Repository() {
             </Grid>
             <Grid item md={3} xs={12}>
               <TextField
+                size="small"
                 fullWidth
                 label="Email Address"
-                margin="dense"
                 name="email"
                 required
                 variant="outlined"
@@ -52,9 +51,9 @@ export default function Repository() {
             </Grid>
             <Grid item md={3} xs={12}>
               <TextField
+                size="small"
                 fullWidth
                 label="Phone Number"
-                margin="dense"
                 name="phone"
                 type="number"
                 variant="outlined"
@@ -63,9 +62,9 @@ export default function Repository() {
 
             <Grid item md={3} xs={12}>
               <TextField
+                size="small"
                 fullWidth
                 label="Country"
-                margin="dense"
                 name="country"
                 required
                 variant="outlined"
@@ -74,16 +73,16 @@ export default function Repository() {
           </Grid>
         </CardContent>
         <Divider />
-        <CardActions>
-          <Button
+        <CardButtonSave>
+          <ButtonSave
             size="small"
             color="primary"
             variant="contained"
             startIcon={<SaveIcon />}
           >
             Salvar
-          </Button>
-        </CardActions>
+          </ButtonSave>
+        </CardButtonSave>
       </form>
     </Card>
   );
