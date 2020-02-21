@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import {
+  AppBar,
+  Divider,
+  Drawer,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Typography,
+  makeStyles,
+} from '@material-ui/core';
+
+import MenuIcon from '@material-ui/icons/Menu';
+
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleIcon from '@material-ui/icons/People';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import { Container, MenuLogo } from './styles';
+
+import SidebarNav from './Components/SidebarNav';
 
 const drawerWidth = 240;
 
@@ -36,6 +36,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      backgroundImage:
+        'linear-gradient(45deg,#6E8190 0%, #596776 50%, #242931 100%)',
     },
   },
   menuButton: {
@@ -61,15 +63,50 @@ const useStyles = makeStyles(theme => ({
 export default function Header({ body }) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const pages = [
+    {
+      title: 'Repositorios',
+      href: '/repository',
+      icon: <DashboardIcon />,
+      isOpen: false,
+      list: [
+        {
+          title: 'Cadastrar',
+          href: '/repository',
+          icon: <PeopleIcon />,
+        },
+        {
+          title: 'Listar',
+          href: '/user',
+          icon: <PeopleIcon />,
+        },
+      ],
+    },
+    {
+      title: 'Users',
+      href: '/user',
+      icon: <PeopleIcon />,
+      list: [],
+    },
+    {
+      title: 'Products',
+      href: '/products',
+      icon: <ShoppingBasketIcon />,
+      list: [],
+    },
+    {
+      title: 'Authentication',
+      href: '/sign-in',
+      icon: <LockOpenIcon />,
+      list: [],
+    },
+  ];
+
   const drawer = (
     <div>
       <MenuLogo>
@@ -77,33 +114,8 @@ export default function Header({ body }) {
       </MenuLogo>
       <Divider />
 
-      <List>
-        <ListItem button onClick={handleClick}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Hello" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItem>
-          </List>
-        </Collapse>
-        <ListItem button>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <Link to="/">
-            <ListItemText primary="Secon" />
-          </Link>
-        </ListItem>
-      </List>
+      <SidebarNav className={classes.nav} pages={pages} />
+
       <Divider />
     </div>
   );

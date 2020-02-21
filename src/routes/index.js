@@ -9,6 +9,8 @@ export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={Repository} />
+      <Route exact path="/repository" component={Repository} />
+      <Route exact path="/user" component={Repository} />
     </Switch>
   );
 }
